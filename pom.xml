@@ -7,10 +7,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 
   <version>1.0-SNAPSHOT</version>
 
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <properties>
-    <version.wildfly-swarm>2017.3.3</version.wildfly-swarm>
+    <version.wildfly-swarm>2017.6.1</version.wildfly-swarm>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -21,7 +21,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     <dependencies>
       <dependency>
         <groupId>org.wildfly.swarm</groupId>
-        <artifactId>bom-all</artifactId>
+        <artifactId>bom</artifactId>
         <version>${version.wildfly-swarm}</version>
         <scope>import</scope>
         <type>pom</type>
@@ -30,15 +30,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   </dependencyManagement>
 
   <build>
-    <finalName>swarm-sparkpi</finalName>
     <plugins>
       <plugin>
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-plugin</artifactId>
         <version>${version.wildfly-swarm}</version>
-        <configuration>
-          <mainClass>io.radanalytics.SparkPiSwarmApplication</mainClass>
-        </configuration>
         <executions>
           <execution>
             <goals>
@@ -51,13 +47,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   </build>
 
   <dependencies>
-    <!-- Java EE 7 dependency -->
-    <dependency>
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <version>7.0</version>
-      <scope>provided</scope>
-    </dependency> 
     <!-- WildFly Swarm Fractions -->
     <dependency>
       <groupId>org.wildfly.swarm</groupId>
@@ -67,28 +56,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
  
     <dependency>
        <groupId>org.apache.spark</groupId>
-       <artifactId>spark-core_2.10</artifactId>
+       <artifactId>spark-core_2.11</artifactId>
        <version>2.1.0</version>
+       <scope>provided</scope>
     </dependency>
-<!--
-    <dependency>
-          <groupId>org.apache.hadoop</groupId>
-          <artifactId>hadoop-hdfs</artifactId>
-       <version>2.2.0</version>
-    </dependency>
--->
-    <dependency>
-       <groupId>com.sun.jersey</groupId>
-       <artifactId>jersey-bundle</artifactId>
-       <version>1.16</version>
-       <exclusions>
-          <exclusion>
-            <groupId>asm</groupId>
-            <artifactId>asm</artifactId>
-          </exclusion>
-       </exclusions>
-    </dependency>
-
   </dependencies>
 
 </project>
