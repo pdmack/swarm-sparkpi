@@ -7,7 +7,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 
   <version>1.0-SNAPSHOT</version>
 
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
 
   <properties>
     <version.wildfly-swarm>2017.6.1</version.wildfly-swarm>
@@ -35,6 +35,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
         <groupId>org.wildfly.swarm</groupId>
         <artifactId>wildfly-swarm-plugin</artifactId>
         <version>${version.wildfly-swarm}</version>
+        <configuration>
+          <mainClass>io.radanalytics.SparkPiSwarmApplication</mainClass>
+          <properties>
+            <spark.submit.jarfile>${project.name}-${project.version}.jar</spark.submit.jarfile> 
+          </properties>
+        </configuration>
         <executions>
           <execution>
             <goals>

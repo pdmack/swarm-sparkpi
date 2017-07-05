@@ -1,0 +1,6 @@
+swarm:
+  deployment:
+    sparkpi-app.war:
+      jaxrs:
+        packages:
+           - io.radanalytics
