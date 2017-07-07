@@ -1,4 +1,4 @@
-package io.radanalytics;
+package io.radanalytics.examples.wfswarm;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;

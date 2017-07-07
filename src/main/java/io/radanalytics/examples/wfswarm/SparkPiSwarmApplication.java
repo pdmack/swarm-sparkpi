@@ -1,4 +1,4 @@
-package io.radanalytics;
+package io.radanalytics.examples.wfswarm;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.wildfly.swarm.Swarm;
@@ -10,7 +10,7 @@ public class SparkPiSwarmApplication {
     public static void main(String[] args) throws Exception {
         Swarm swarm = new Swarm();
 
-        JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class, "sparkpi-app.war");
+        JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class, "swarm-sparkpi.war");
         deployment.addPackage(SparkPiSwarmApplication.class.getPackage());
         deployment.addResource(SparkPiEndpoint.class);
 

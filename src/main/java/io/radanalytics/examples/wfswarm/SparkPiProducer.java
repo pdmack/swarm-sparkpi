@@ -1,4 +1,4 @@
-package io.radanalytics;
+package io.radanalytics.examples.wfswarm;
 
 import java.io.Serializable;
 import java.util.ArrayList;
