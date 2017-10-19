@@ -64,13 +64,27 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     </dependency>
 
     <dependency>
+       <groupId>com.fasterxml.jackson.module</groupId>
+       <artifactId>jackson-module-scala_2.11</artifactId>
+       <version>2.7.4</version>
+    </dependency>
+
+    <dependency>
        <groupId>org.apache.spark</groupId>
        <artifactId>spark-core_2.11</artifactId>
        <version>2.2.0</version>
        <exclusions>
           <exclusion>
             <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_2.11</artifactId>
           </exclusion>
        </exclusions>
     </dependency>
