@@ -7,7 +7,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 
   <version>1.0-SNAPSHOT</version>
 
-  <packaging>jar</packaging>
+  <packaging>war</packaging>
 
   <properties>
     <version.wildfly-swarm>2017.10.0</version.wildfly-swarm>
@@ -36,7 +36,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
         <artifactId>wildfly-swarm-plugin</artifactId>
         <version>${version.wildfly-swarm}</version>
         <configuration>
-          <mainClass>io.radanalytics.examples.wfswarm.SparkPiSwarmApplication</mainClass>
+          <fractionDetectMode>never</fractionDetectMode>
         </configuration>
         <executions>
           <execution>
@@ -75,20 +75,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
        <version>2.2.0</version>
        <exclusions>
           <exclusion>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-          </exclusion>
-          <exclusion>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-          </exclusion>
-          <exclusion>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-scala_2.11</artifactId>
           </exclusion>
        </exclusions>
     </dependency>
 
+    <!-- need to explicitly add to cover hadoop-hdfs CDI scanning -->
     <dependency>
        <groupId>com.sun.jersey</groupId>
        <artifactId>jersey-bundle</artifactId>
