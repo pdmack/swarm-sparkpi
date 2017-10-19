@@ -5,12 +5,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
   <groupId>io.radanalytics</groupId>
   <artifactId>swarm-sparkpi</artifactId>
 
-  <version>0.0.1</version>
+  <version>1.0-SNAPSHOT</version>
 
   <packaging>jar</packaging>
 
   <properties>
-    <version.wildfly-swarm>2017.7.0</version.wildfly-swarm>
+    <version.wildfly-swarm>2017.10.0</version.wildfly-swarm>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <failOnMissingWebXml>false</failOnMissingWebXml>
@@ -66,9 +66,27 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
     <dependency>
        <groupId>org.apache.spark</groupId>
        <artifactId>spark-core_2.11</artifactId>
-       <version>2.1.0</version>
-       <scope>provided</scope>
+       <version>2.2.0</version>
+       <exclusions>
+          <exclusion>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+          </exclusion>
+       </exclusions>
     </dependency>
+
+    <dependency>
+       <groupId>com.sun.jersey</groupId>
+       <artifactId>jersey-bundle</artifactId>
+       <version>1.19.4</version>
+       <exclusions>
+          <exclusion>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+          </exclusion>
+       </exclusions>
+    </dependency>
+
   </dependencies>
 
 </project>
