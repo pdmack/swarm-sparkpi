@@ -1,20 +1,22 @@
 package io.radanalytics.examples.wfswarm;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.wildfly.swarm.Swarm;
+import org.wildfly.swarm.jaxrs.JAXRSArchive;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+public class SparkPiSwarmApplication {
 
-@ApplicationPath("/app")
-public class SparkPiSwarmApplication extends Application {
+    public static void main(String[] args) throws Exception {
+        Swarm swarm = new Swarm();
+        swarm.start();
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new LinkedHashSet<Class<?>>();
-        resources.add(DefaultEndpoint.class);
-        resources.add(SparkPiEndpoint.class);
-        return resources;
+        JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class, "swarm-sparkpi.war");
+        deployment.addPackage(SparkPiSwarmApplication.class.getPackage());
+        deployment.addResource(DefaultEndpoint.class);
+        deployment.addResource(SparkPiEndpoint.class);
+
+        deployment.addAllDependencies();
+        swarm.deploy(deployment);
     }
 }
 
