@@ -5,10 +5,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 
+@Path("/")
 public class SparkPiResource {
 
     @GET
-    @Path("/")
     @Produces("text/plain")
     public Response getDefault() {
         return Response.ok("WildFly Swarm SparkPi server ready.\nAdd /sparkpi to invoke Pi computation.").build();

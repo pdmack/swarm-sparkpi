@@ -1,73 +1,76 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.radanalytics</groupId>
-    <artifactId>swarm-sparkpi</artifactId>
+  <groupId>io.radanalytics</groupId>
+  <artifactId>swarm-sparkpi</artifactId>
 
-    <version>1.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
 
-    <packaging>jar</packaging>
+  <packaging>jar</packaging>
 
-    <properties>
-        <version.wildfly-swarm>2018.1.0</version.wildfly-swarm>
-        <version.resteasy>3.0.24.Final</version.resteasy>
-        <version.spark>2.2.0</version.spark>
-        <version.hadoop>2.7.3</version.hadoop>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+  <properties>
+    <version.wildfly-swarm>2017.12.1</version.wildfly-swarm>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>wildfly-swarm-plugin</artifactId>
-                <version>${version.wildfly-swarm}</version>
-                <configuration>
-                    <mainClass>io.radanalytics.examples.wfswarm.SparkPiSwarmDeployment</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.wildfly.swarm</groupId>
+        <artifactId>wildfly-swarm-plugin</artifactId>
+        <version>${version.wildfly-swarm}</version>
+        <configuration>
+          <mainClass>io.radanalytics.examples.wfswarm.SparkPiSwarmDeployment</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>package</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+          <filtering>true</filtering>
+      </resource>
+    </resources>
+  </build>
 
-    <dependencies>
+  <dependencies>
+    <!-- WildFly Swarm Fractions -->
+    <dependency>
+      <groupId>org.wildfly.swarm</groupId>
+      <artifactId>jaxrs</artifactId>
+      <version>${version.wildfly-swarm}</version>
+    </dependency>
 
-        <!-- WildFly Swarm Fractions -->
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>jaxrs</artifactId>
-            <version>${version.wildfly-swarm}</version>
-        </dependency>
+    <!--
+    <dependency>
+       <groupId>com.fasterxml.jackson.module</groupId>
+       <artifactId>jackson-module-scala_2.11</artifactId>
+       <version>2.8.9</version>
+    </dependency>
+    -->
 
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-servlet-initializer</artifactId>
-            <version>${version.resteasy}</version>
-        </dependency>
+    <dependency>
+       <groupId>org.apache.spark</groupId>
+       <artifactId>spark-core_2.11</artifactId>
+       <version>2.2.0</version>
+       <exclusions>
+          <exclusion>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+          </exclusion>
+       </exclusions>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_2.11</artifactId>
-            <version>${version.spark}</version>
-            <optional>true</optional>
-        </dependency>
-
-    </dependencies>
+  </dependencies>
 
 </project>
