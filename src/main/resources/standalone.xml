@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-
-<server xmlns="urn:jboss:domain:4.0">
-    <!--
-    <subsystem xmlns="urn:jboss:domain:deployment-scanner:2.0">
-        <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-enabled="false" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
-    </subsystem>
-    -->
-</server>

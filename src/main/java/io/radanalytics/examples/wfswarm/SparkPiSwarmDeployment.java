@@ -10,20 +10,16 @@ import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 
 public class SparkPiSwarmDeployment {
 
+    // NOTE: The use of main() is deprecated in WildFly Swarm.
+    // However this technique allows us to dynamically create
+    // a "virtual" JAX-RS WAR deployment while the Maven build
+    // renders an app jar suitable for deployment to a Spark cluster.
     public static void main(String[] args) throws Exception {
-        ClassLoader cl = SparkPiSwarmDeployment.class.getClassLoader();
-        URL xmlConfig = cl.getResource("standalone.xml");
-
-        assert xmlConfig!=null : "Failed to load standalone.xml";
-
-        Swarm swarm = new Swarm(false).withXmlConfig(xmlConfig);
+        Swarm swarm = new Swarm();
         swarm.start();
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class, "swarm-sparkpi.war");
         deployment.addPackage(SparkPiSwarmApplication.class.getPackage());
-
-        deployment.addAsWebInfResource(
-                new ClassLoaderAsset("WEB-INF/web.xml", cl), "web.xml");
 
         deployment.addAllDependencies();
         swarm.deploy(deployment);

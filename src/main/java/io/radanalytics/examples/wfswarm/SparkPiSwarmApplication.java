@@ -7,9 +7,24 @@ import java.util.Set;
 
 @ApplicationPath("/app")
 public class SparkPiSwarmApplication extends Application {
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> s = new HashSet<Class<?>>();
-        s.add(SparkPiResource.class);
-        return s;
+
+    private Set<Object> singletons = new HashSet<Object>();
+    private Set<Class<?>> classes = new HashSet<Class<?>>();
+
+    public SparkPiSwarmApplication()
+    {
+        singletons.add(new SparkPiResource());
+    }
+
+    @Override
+    public Set<Class<?>> getClasses()
+    {
+        return classes;
+    }
+
+    @Override
+    public Set<Object> getSingletons()
+    {
+        return singletons;
     }
 }
