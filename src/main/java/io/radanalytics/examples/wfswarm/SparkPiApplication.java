@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ApplicationPath("/app")
-public class SparkPiSwarmApplication extends Application {
+public class SparkPiApplication extends Application {
 
     private Set<Object> singletons = new HashSet<Object>();
     private Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    public SparkPiSwarmApplication()
+    public SparkPiApplication()
     {
         singletons.add(new SparkPiResource());
     }

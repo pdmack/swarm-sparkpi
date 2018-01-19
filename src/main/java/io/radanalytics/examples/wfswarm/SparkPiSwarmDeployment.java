@@ -19,7 +19,7 @@ public class SparkPiSwarmDeployment {
         swarm.start();
 
         JAXRSArchive deployment = ShrinkWrap.create(JAXRSArchive.class, "swarm-sparkpi.war");
-        deployment.addPackage(SparkPiSwarmApplication.class.getPackage());
+        deployment.addPackage(SparkPiApplication.class.getPackage());
 
         deployment.addAllDependencies();
         swarm.deploy(deployment);
