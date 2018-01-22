@@ -3,14 +3,23 @@ package io.radanalytics.examples.wfswarm;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+@ApplicationScoped
 public class SparkPiProducer implements Serializable {
+
+    @Inject
+    private SparkContextProvider sparkContext;
+
     public String getPi() {
-        JavaSparkContext jsc = SparkContextProvider.getContext();
+        JavaSparkContext jsc = sparkContext.getContext();
 
         int slices = 2;
         int n = 100000 * slices;

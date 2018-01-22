@@ -77,10 +77,22 @@
             <version>7.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>3.0.2.Final</version>
+        </dependency>
+
         <!-- WildFly Swarm Fractions -->
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>jaxrs</artifactId>
+            <version>${version.wildfly-swarm}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>cdi</artifactId>
             <version>${version.wildfly-swarm}</version>
         </dependency>
 
