@@ -1,12 +1,8 @@
 package io.radanalytics.examples.wfswarm;
 
-import java.net.URL;
-import javax.ws.rs.ApplicationPath;
-
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.wildfly.swarm.Swarm;
 import org.wildfly.swarm.jaxrs.JAXRSArchive;
-import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 
 public class SparkPiSwarmDeployment {
 

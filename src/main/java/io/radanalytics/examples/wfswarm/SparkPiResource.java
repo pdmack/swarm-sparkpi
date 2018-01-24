@@ -1,8 +1,10 @@
 package io.radanalytics.examples.wfswarm;
 
-import javax.ws.rs.Path;
+import javax.enterprise.inject.spi.CDI;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.GET;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 @Path("/")
@@ -11,15 +13,25 @@ public class SparkPiResource {
     @GET
     @Produces("text/plain")
     public Response getDefault() {
-        return Response.ok("WildFly Swarm SparkPi server ready.\nAdd /sparkpi to invoke Pi computation.").build();
+        return Response.ok("WildFly Swarm SparkPi server ready.\nAdd /sparkpi to invoke Pi computation.\n").build();
     }
 
     @GET
     @Path("/sparkpi")
     @Produces("text/plain")
     public Response getPi() {
-        SparkPiProducer pi = new SparkPiProducer();
+        SparkPiProducer pi = this.lookupBean();
+        if (pi == null) {
+            throw new InternalServerErrorException("No SparkPiProducer found in CDI lookup!");
+        }
         return Response.ok(pi.getPi()).build();
+    }
+
+    // injection of the provider doesn't work here but
+    // CDI gives us an alternative which is to look up the
+    // singleton bean in the current CDI context
+    private SparkPiProducer lookupBean() {
+        return (SparkPiProducer)CDI.current().select(SparkPiProducer.class).get();
     }
 
 }

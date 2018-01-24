@@ -9,17 +9,10 @@ import java.util.Set;
 public class SparkPiApplication extends Application {
 
     private Set<Object> singletons = new HashSet<Object>();
-    private Set<Class<?>> classes = new HashSet<Class<?>>();
 
     public SparkPiApplication()
     {
         singletons.add(new SparkPiResource());
-    }
-
-    @Override
-    public Set<Class<?>> getClasses()
-    {
-        return classes;
     }
 
     @Override
