@@ -17,16 +17,12 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.Function2;
 
-import org.jboss.logging.Logger;
-
 import org.wildfly.swarm.spi.runtime.annotations.ConfigurationValue;
 
 // make this available in CDI as a bean so we can look it up
 @Model
 @ApplicationScoped
 public class SparkPiProducer implements Serializable {
-
-    private static final Logger LOG = Logger.getLogger(SparkPiProducer.class);
 
     private SparkConf sparkConf;
     private JavaSparkContext javaSparkContext;
@@ -38,14 +34,11 @@ public class SparkPiProducer implements Serializable {
     @ConfigurationValue("spark.submit.jarfile")
     String appJarFile;
 
-    public SparkPiProducer() {
-        LOG.info("SparkPiProducer() invoked...");
-    }
+    public SparkPiProducer() {}
 
     // use CDI events to "force" early initialization of our Spark environment
     // as part of the deployment in WildFly Swarm
     public void init(@Observes @Initialized(ApplicationScoped.class) Object init) {
-        LOG.info("SparkPiProducer.init() called...");
         this.sparkConf = new SparkConf().setAppName("WildFly Swarm SparkPi");
         this.sparkConf.setJars(new String[]{appJarFile});
         this.javaSparkContext = new JavaSparkContext(sparkConf);
