@@ -51,8 +51,10 @@ public class SparkPiProducer implements Serializable {
         this.javaSparkContext = new JavaSparkContext(sparkConf);
     }
 
-    public String getPi() {
-        int slices = 2;
+    public String getPi(int scale) {
+        // should get something here from the Resource query
+        // but just in case we are called from elsewhere...
+        int slices = scale>1 ? scale : 2;
         int n = 100000 * slices;
         List<Integer> l = new ArrayList<Integer>(n);
         for (int i = 0; i < n; i++) {
