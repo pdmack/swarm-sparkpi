@@ -20,7 +20,7 @@ You should have access to an OpenShift cluster and be logged in with the
    oc new-app --template oshinko-java-spark-build-dc \
        -p APPLICATION_NAME=wfswarm-sparkpi \
        -p GIT_URI=https://github.com/radanalyticsio/tutorial-sparkpi-java-wfswarm \
-       -p APP_FILE=sparkpi-app-1.0-SNAPSHOT-swarm.jar
+       -p APP_FILE=wfswarm-sparkpi-1.0-SNAPSHOT-swarm.jar
    ```
 
 1. Expose an external route
